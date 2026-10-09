@@ -1297,7 +1297,7 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
       var btn=f.querySelector('button.cta'); var old=btn.textContent;
       btn.disabled=true; btn.textContent='שולחת...'; if(er) er.hidden=true;
       var body=new URLSearchParams(new FormData(f)).toString();
-      Promise.resolve({ok:true})
+      fetch('https://lali-crm.tail60e96a.ts.net/api/site/lead',{method:'POST',headers:{'Content-Type':'application/json','X-CRM':'1'},body:JSON.stringify(Object.fromEntries(new FormData(f)))})
         .then(function(r){ if(!r.ok) throw new Error('http '+r.status);
           f.hidden=true; if(sent) sent.hidden=false;
           var fname=(f.querySelector('[name=fname]')||{}).value||'';
