@@ -1287,7 +1287,11 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
   },1000);
 })();
 (function(){
-  /* שליחת לידים אל Netlify Forms - נשמרים בלשונית Forms של הפרויקט */
+  /* שליחת לידים אל ה-CRM (מודול הטפסים, /f/vsl-landing) עם שיוך קמפיין: utm_*, fbclid, ad_id מהקישור של המודעה (11.10.2026) */
+  var KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','ad_id'];
+  function ATTR(){ var o={}; try{ var q=new URLSearchParams(location.search); KEYS.forEach(function(k){ var v=q.get(k); if(v){ o[k]=v.slice(0,200); try{ sessionStorage.setItem('attr_'+k,o[k]); }catch(e){} } else { try{ v=sessionStorage.getItem('attr_'+k); if(v) o[k]=v; }catch(e){} } }); }catch(e){} return o; }
+  function COOKIE(n){ var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)'); return m?decodeURIComponent(m[1]):''; }
+  ATTR();
   document.querySelectorAll('.lform form').forEach(function(f){
     var lform=f.closest('.lform'); if(!lform) return;
     var sent=lform.querySelector('.fsent'), er=lform.querySelector('.ferr');
@@ -1297,7 +1301,10 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
       var btn=f.querySelector('button.cta'); var old=btn.textContent;
       btn.disabled=true; btn.textContent='שולחת...'; if(er) er.hidden=true;
       var body=new URLSearchParams(new FormData(f)).toString();
-      fetch('https://lali-crm.tail60e96a.ts.net/api/site/lead',{method:'POST',headers:{'Content-Type':'application/json','X-CRM':'1'},body:JSON.stringify(Object.fromEntries(new FormData(f)))})
+      var d=Object.fromEntries(new FormData(f)); var attr=ATTR(); for(var k in attr) d[k]=attr[k];
+      d.page=location.pathname; d.event_id=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()); f.dataset.eventId=d.event_id;
+      d.fbp=COOKIE('_fbp'); d.fbc=COOKIE('_fbc')||(attr.fbclid?'fb.1.'+Date.now()+'.'+attr.fbclid:'');
+      fetch('https://lali-crm.tail60e96a.ts.net/f/vsl-landing',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
         .then(function(r){ if(!r.ok) throw new Error('http '+r.status);
           f.hidden=true; if(sent) sent.hidden=false;
           var fname=(f.querySelector('[name=fname]')||{}).value||'';
@@ -1329,7 +1336,7 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
     var f=lf.querySelector('form'), sent=lf.querySelector('.fsent'), where=i===0?'top':'bottom';
     if(f) f.addEventListener('focusin',function(){ once('FORM-START-'+where,{form:where}); });
     if(sent) new MutationObserver(function(){
-      if(!sent.hidden && !done['lead-'+where]){ done['lead-'+where]=1; try{ fbq('track','Lead',{form:where}); }catch(e){} }
+      if(!sent.hidden && !done['lead-'+where]){ done['lead-'+where]=1; try{ var eid=(lform.querySelector('form')||{}).dataset?lform.querySelector('form').dataset.eventId:null; fbq('track','Lead',{form:where},eid?{eventID:eid}:undefined); }catch(e){} }
     }).observe(sent,{attributes:true,attributeFilter:['hidden']});
   });
 
