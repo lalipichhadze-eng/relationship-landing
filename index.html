@@ -1336,7 +1336,7 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
     var f=lf.querySelector('form'), sent=lf.querySelector('.fsent'), where=i===0?'top':'bottom';
     if(f) f.addEventListener('focusin',function(){ once('FORM-START-'+where,{form:where}); });
     if(sent) new MutationObserver(function(){
-      if(!sent.hidden && !done['lead-'+where]){ done['lead-'+where]=1; try{ var eid=(lform.querySelector('form')||{}).dataset?lform.querySelector('form').dataset.eventId:null; fbq('track','Lead',{form:where},eid?{eventID:eid}:undefined); }catch(e){} }
+      if(!sent.hidden && !done['lead-'+where]){ done['lead-'+where]=1; try{ var eid=f&&f.dataset?f.dataset.eventId:null; fbq('track','Lead',{form:where},eid?{eventID:eid}:undefined); }catch(e){} }
     }).observe(sent,{attributes:true,attributeFilter:['hidden']});
   });
 
