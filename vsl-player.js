@@ -5,8 +5,8 @@
   if (!frame || !cover) return;
   var shell = frame.closest('.video-shell');
   var status = document.getElementById('vsl-status');
-  var busy = false;
-  var player = null;
+  var requested = false;
+  var started = false;
 
   function revealPlayer() {
     cover.hidden = true;
@@ -14,63 +14,45 @@
     frame.focus();
   }
 
-  function nativeFallback() {
-    // A fresh native player still starts at zero; controls remain available.
-    var url = new URL(frame.src);
-    url.searchParams.set('autoplay', '1');
-    url.searchParams.set('muted', '0');
-    url.hash = 't=0s';
-    frame.src = url.href;
-    revealPlayer();
-    if (status) {
-      status.textContent = 'אם הסרטון לא מתחיל, לחצי על כפתור ההפעלה בנגן.';
-      status.hidden = false;
-    }
-  }
-
-  function bounded(promise) {
-    return new Promise(function (resolve, reject) {
-      var timer = setTimeout(function () { reject(new Error('Player timeout')); }, 10000);
-      Promise.resolve(promise).then(function (value) {
-        clearTimeout(timer);
-        resolve(value);
-      }, function (error) {
-        clearTimeout(timer);
-        reject(error);
-      });
+  function startFromBeginning() {
+    // Send in the click itself. Keep the already-loaded player and its buffer.
+    [
+      {method:'setCurrentTime',value:0},
+      {method:'setVolume',value:1},
+      {method:'setMuted',value:false},
+      {method:'play'}
+    ].forEach(function (message) {
+      frame.contentWindow.postMessage(JSON.stringify(message), 'https://player.vimeo.com');
     });
   }
 
-  try {
-    if (window.Vimeo && window.Vimeo.Player) player = new Vimeo.Player(frame);
-  } catch (error) {
-    player = null;
-  }
+  // Retain an early click if the frame finishes loading afterwards.
+  window.addEventListener('message', function (event) {
+    if (!requested || started || event.source !== frame.contentWindow || event.origin !== 'https://player.vimeo.com') return;
+    var data = event.data;
+    if (typeof data === 'string') { try { data = JSON.parse(data); } catch (error) { return; } }
+    if (!data) return;
+    if (data.method === 'play') { started = true; return; }
+    if (data.event === 'ready' || data.method === 'ping') startFromBeginning();
+  });
 
-  cover.addEventListener('click', async function () {
-    if (busy) return;
-    busy = true;
-    cover.disabled = true;
-    cover.setAttribute('aria-busy', 'true');
+  frame.addEventListener('load', function () {
+    if (requested && !started) frame.contentWindow.postMessage(JSON.stringify({method:'ping'}), 'https://player.vimeo.com');
+  });
+
+  cover.addEventListener('click', function () {
+    if (requested) return;
+    requested = true;
     if (status) status.hidden = true;
+    // The full image is one button; give visual feedback without any timer.
+    revealPlayer();
     try {
-      if (!player) {
-        nativeFallback();
-        return;
-      }
-      await bounded(player.ready());
-      await bounded(player.pause());
-      await bounded(player.setCurrentTime(0));
-      await bounded(player.setVolume(1));
-      await bounded(player.setMuted(false));
-      await bounded(player.play());
-      revealPlayer();
+      startFromBeginning();
     } catch (error) {
-      nativeFallback();
-    } finally {
-      busy = false;
-      cover.disabled = false;
-      cover.removeAttribute('aria-busy');
+      if (status) {
+        status.textContent = 'לא הצלחנו להפעיל את הסרטון. נסי דרך כפתור ההפעלה בנגן.';
+        status.hidden = false;
+      }
     }
   });
 })();
