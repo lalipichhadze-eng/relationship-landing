@@ -248,6 +248,9 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1580091759987758&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+<script defer src="https://player.vimeo.com/api/player.js"></script>
+<script defer src="vsl-player.js"></script>
+<noscript><style>#vclick{display:none}.video-shell::before,.video-shell::after{display:none}</style></noscript>
 </head>
 <body>
 
@@ -289,9 +292,14 @@ src="https://www.facebook.com/tr?id=1580091759987758&ev=PageView&noscript=1"
       <div class="video-shell rise" style="--ad:.44s">
         <div class="video-card has-video" id="vsl" aria-label="הסרטון">
           <iframe id="vslframe" src="https://player.vimeo.com/video/1221910135?autoplay=1&muted=1&loop=0&autopause=0&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="הסרטון"></iframe>
-          <button type="button" class="vclick" id="vclick" aria-label="הפעלת הסרטון מההתחלה עם קול"></button>
+          <button type="button" class="vclick" id="vclick" aria-label="תלחץ כאן כדי להפעיל סאונד" aria-describedby="vsl-status">
+            <img class="vsl-poster" src="vsl-thumbnail.png" width="1871" height="1323" alt="" fetchpriority="high">
+            <span class="vsl-sound-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.1-3.8v7.6a4.5 4.5 0 0 0 2.1-3.8Zm0-8.4v2.5a7.5 7.5 0 0 1 0 11.8v2.5a10 10 0 0 0 0-16.8Z"/></svg></span>
+            <span class="vsl-sound-label"><span>תלחץ כאן כדי להפעיל סאונד</span></span>
+          </button>
         </div>
       </div>
+      <p class="vsl-status" id="vsl-status" role="status" hidden></p>
       <p class="play-line rise" style="--ad:.58s"><svg class="arrow" viewBox="0 0 40 30" aria-hidden="true"><path d="M20,28 C20,18 19,10 20,3 M11,11 L20,2.5 L29,11"/></svg>לחצי PLAY וצפי בסרטון הקצר לפני שהגישה נסגרת</p>
     </div>
   </div>
@@ -746,7 +754,34 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
 /* הסרטון המוטמע - ממלא את מסגרת הכרטיס המאושרת */
 .video-card.has-video{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:default}
 .video-card.has-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:inherit;z-index:1}
-.vclick{position:absolute;inset:0;background:transparent;border:0;cursor:pointer;z-index:2;padding:0}
+.video-shell{position:relative;isolation:isolate;overflow:visible;container-type:inline-size}
+.video-shell::before{content:'';position:absolute;inset:4px;border-radius:inherit;pointer-events:none;z-index:-1;
+  box-shadow:0 0 12px 5px #ffd15f,0 0 34px 13px rgba(255,188,55,.96),0 0 68px 20px rgba(224,90,0,.67);
+  animation:vslOuterGlow 1.2s ease-in-out infinite}
+.video-shell::after{content:'';position:absolute;inset:3px;border:2px solid #ffe89e;border-radius:23px;pointer-events:none;z-index:4;
+  box-shadow:0 0 9px 2px #ffd15f,inset 0 0 12px 2px rgba(255,209,95,.78);animation:vslFrameGlow 1.2s ease-in-out infinite}
+.video-shell.is-playing::before,.video-shell.is-playing::after{display:none}
+.video-card.has-video{container-type:inline-size}
+.vclick{position:absolute;inset:0;background:transparent;border:0;cursor:pointer;z-index:2;padding:0;overflow:visible;border-radius:inherit;direction:rtl;font:inherit}
+.vclick[hidden]{display:none}
+.vclick:focus-visible{outline:3px solid #3a2707;outline-offset:-4px}
+.vsl-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;pointer-events:none}
+.vsl-sound-mark{position:absolute;left:50%;top:64%;transform:translate(-50%,-50%);width:clamp(26px,7.34375cqw,94px);aspect-ratio:1;
+  display:grid;place-items:center;border-radius:50%;border:clamp(1px,.3125cqw,4px) solid #ffd15f;background:#e05a00;color:#f9f5e3}
+.vsl-sound-mark svg{display:block;width:47%;height:47%;fill:currentColor}
+.vsl-sound-label{position:absolute;left:25%;top:72%;width:50%;box-sizing:border-box;padding:clamp(5px,1.40625cqw,18px) clamp(8px,1.953125cqw,25px);
+  border:clamp(1px,.3125cqw,4px) solid #ffd15f;border-radius:999px;background:#e05a00;color:#f9f5e3;
+  font:700 clamp(12px,2.5cqw,32px)/1.15 Arial,sans-serif;white-space:nowrap;text-align:center}
+.vsl-sound-label>span{position:relative;z-index:1;display:block;transform:translateZ(0)}
+.vsl-sound-mark::before,.vsl-sound-label::before{content:'';position:absolute;inset:-3px;border-radius:inherit;border:2px solid #ffe89e;
+  box-shadow:0 0 12px 3px #ffd15f,0 0 28px 7px rgba(255,209,95,.75);pointer-events:none;animation:vslInnerGlow 1.6s cubic-bezier(.77,0,.175,1) infinite}
+.vsl-sound-mark::before{clip-path:inset(0 -50px -50px)}
+.vsl-status{font:16px/1.5 'Rubik',sans-serif;text-align:center;color:#f9f5e3;margin:14px 0 0}
+@keyframes vslOuterGlow{0%,100%{opacity:.45}50%{opacity:.85}}
+@keyframes vslFrameGlow{0%,100%{opacity:.55}50%{opacity:.9}}
+@keyframes vslInnerGlow{0%,100%{opacity:.17}50%{opacity:1}}
+@container (max-width:480px){.vsl-sound-label{left:13%;width:74%}}
+@media (prefers-reduced-motion:reduce){.video-shell::before,.video-shell::after,.vsl-sound-mark::before,.vsl-sound-label::before{animation:none;opacity:.45}}
 
 
 /* נעילת טופס הלידים - 60 שניות, מנעול, שחור 60% */
@@ -1243,19 +1278,6 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
     t.focus();
     var done=function(){ t.removeAttribute('contenteditable'); t.removeEventListener('blur',done); };
     t.addEventListener('blur',done);
-  });
-})();
-(function(){
-  /* הסרטון: רץ אוטומטית על השתק; לחיצה מפעילה מההתחלה עם קול */
-  var fr=document.getElementById('vslframe'), ov=document.getElementById('vclick');
-  if(!fr||!ov) return;
-  var send=function(m){try{fr.contentWindow.postMessage(JSON.stringify(m),'https://player.vimeo.com')}catch(e){}};
-  ov.addEventListener('click',function(){
-    send({method:'setVolume',value:1});
-    send({method:'setMuted',value:false});
-    send({method:'setCurrentTime',value:0});
-    send({method:'play'});
-    ov.style.display='none';
   });
 })();
 (function(){
