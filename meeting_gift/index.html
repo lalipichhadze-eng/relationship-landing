@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>המתנה שלך | ללי פיצ'חדזה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'FbEinstein';src:url('fonts/FbEinstein-Bold.woff2') format('woff2'),url('fonts/FbEinstein-Bold.woff') format('woff');font-weight:700;font-display:block}
+  @font-face{font-family:'GveretLevin';src:url('fonts/GveretLevin-hebrew.woff2') format('woff2');font-weight:400;font-display:block}
+
+  /* palette and type follow the relationship landing page (relationship-landing, 27.10.2026) */
+  :root{
+    --cream:#F8F5EE;--cream-lift:#FAF9F4;--cream-warm:#F7F3E8;--peach-cream:#ECE3D3;--peach:#F0E5D3;
+    --forest:#3D5444;--olive-deep:#7F7B4E;--sage-light:#C0C7A5;
+    --brown:#442A19;--earth:#614736;--bark:#2A1B07;--bark-deep:#221507;
+    --terracotta:#BF5732;--terracotta-light:#CD663D;--peach-warm:#CC8D69;--sand-gold:#E0C08D;
+    --orange:#E05A00;--orange-ink:#C44C00;--green:#6E7216;
+    --ease:cubic-bezier(.23,1,.32,1);--ease-soft:cubic-bezier(.4,0,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+  body{position:relative;font-family:'Rubik',system-ui,sans-serif;font-size:18px;line-height:1.72;color:var(--earth);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+  .bg{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+  .bg::before{content:'';position:absolute;inset:0;background:linear-gradient(178deg,#FBF8F1 0%,var(--cream-warm) 24%,var(--peach) 58%,var(--peach-cream) 86%,#E7DCC8 100%)}
+  .bg::after{content:'';position:absolute;top:-10vh;left:50%;transform:translateX(-50%);width:170vw;height:90vh;background:radial-gradient(ellipse at 50% 34%,rgba(224,192,141,.3) 0%,rgba(204,141,105,.14) 34%,rgba(247,243,232,0) 70%)}
+  .fl{position:absolute;animation:drift var(--t,20s) var(--ease-soft) infinite;animation-delay:var(--d,0s)}
+  @keyframes drift{0%,100%{transform:translate3d(0,0,0) rotate(var(--r,0deg))}50%{transform:translate3d(0,-10px,0) rotate(calc(var(--r,0deg) + 3deg))}}
+
+  .wrap{width:min(680px,90vw);margin-inline:auto}
+  .display{font-family:'FbEinstein','Rubik',sans-serif;font-weight:700;color:var(--brown)}
+  .script{font-family:'GveretLevin',cursive;font-weight:400}
+
+  /* hero */
+  .hero{padding:34px 0 0;text-align:center}
+  h1{font-size:clamp(2.3rem,9vw,4rem);line-height:1.06;text-wrap:balance}
+  h1 .turn{display:block;margin-top:10px;font-family:'GveretLevin',cursive;font-weight:400;font-size:clamp(2.2rem,9.4vw,3.9rem);line-height:1.15;color:var(--orange-ink)}
+  .sub{margin-top:22px;font-size:clamp(1.05rem,4.4vw,1.3rem);line-height:1.6;color:var(--earth);text-wrap:balance}
+  .sub .last{display:inline-block;position:relative;padding-bottom:16px}
+  .brandline{position:absolute;inset-inline:0;bottom:0;width:100%;height:14px;clip-path:inset(0 0 0 100%);animation:brush 1.15s var(--ease) .35s forwards}
+  .brandline path{fill:var(--orange)}
+  @keyframes brush{to{clip-path:inset(0 0 0 0)}}
+
+  /* dark roots band with the gold shell, as on the landing page */
+  .band{position:relative;isolation:isolate;margin-top:28px;padding:34px 0 30px}
+  .band-end{padding-bottom:22px}
+  .band-top{margin-top:20px;padding:24px 0 22px}
+  .shell.shell-top{max-width:190px;border-radius:24px;padding:4px}
+  .shell.shell-top .card{border-radius:20px}
+  .band::before,.band::after{content:'';position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:100vw;z-index:-1}
+  .band::before{background:linear-gradient(178deg,#3A2510 0%,var(--bark) 34%,var(--bark-deep) 68%,#2C1B08 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 5%,#000 95%,transparent 100%)}
+  .band::after{background:url('roots.jpg') center/cover no-repeat;opacity:.42;filter:saturate(.85) contrast(1.05);-webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.8) 7%,#000 40%,#000 60%,rgba(0,0,0,.8) 93%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.8) 7%,#000 40%,#000 60%,rgba(0,0,0,.8) 93%,transparent 100%)}
+  .shell{max-width:440px;margin-inline:auto;padding:5px;border-radius:30px;background:linear-gradient(135deg,var(--sand-gold) 0%,var(--peach-warm) 24%,var(--terracotta-light) 50%,var(--olive-deep) 76%,var(--green) 100%);box-shadow:0 34px 74px -28px rgba(0,0,0,.72),0 6px 18px -8px rgba(0,0,0,.45)}
+  .card{border-radius:25px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#FDFCF8 0%,var(--cream-warm) 46%,var(--peach) 78%,var(--peach-cream) 100%);-webkit-user-select:none;user-select:none}
+  .photo{position:relative}
+  .photo img{display:block;width:100%;height:auto}
+  .card.player .photo{width:min(190px,52%);margin:20px auto 0;border-radius:18px;overflow:hidden}
+  .card.player .photo::after{content:'';position:absolute;inset:auto 0 0 0;height:30%;background:linear-gradient(180deg,rgba(247,243,232,0) 0%,rgba(247,243,232,.85) 82%,var(--cream-warm) 100%)}
+  .play{position:relative;margin:22px auto 4px;width:86px;aspect-ratio:1;border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;background:radial-gradient(circle at 36% 30%,var(--terracotta-light) 0%,var(--orange) 45%,var(--orange-ink) 100%);box-shadow:0 14px 32px -10px rgba(224,90,0,.6),0 0 0 10px rgba(224,90,0,.12),0 0 0 22px rgba(224,90,0,.06);-webkit-tap-highlight-color:transparent;transition:transform .42s var(--ease)}
+  .play:active{transform:scale(.95)}
+  .play:focus-visible{outline:3px solid var(--brown);outline-offset:4px}
+  @media (hover:hover) and (pointer:fine){.play:hover{transform:scale(1.06)}}
+  .play svg{width:34%;fill:var(--cream-lift)}
+  .play .i-play{margin-inline-start:8%}
+  .play .i-pause,.play.on .i-play{display:none}
+  .play.on .i-pause{display:block}
+  .meta{padding:14px 22px 22px;text-align:center}
+  .meta .name{font-family:'FbEinstein','Rubik',sans-serif;font-weight:700;font-size:1.3rem;line-height:1.3;color:var(--brown)}
+  .meta .what{text-wrap:balance;font-size:.95rem;color:var(--earth);margin-top:2px}
+  .seek{display:block;width:100%;margin-top:14px;accent-color:var(--orange);direction:ltr;cursor:pointer}
+  .time{display:flex;justify-content:space-between;font-size:.82rem;color:var(--earth);direction:ltr;font-variant-numeric:tabular-nums}
+  .no-audio{display:none;padding:18px 22px;text-align:center;color:var(--brown);font-weight:500}
+  .band-line{margin-top:24px;text-align:center;text-wrap:balance;font-family:'FbEinstein','Rubik',sans-serif;font-weight:700;font-size:clamp(1.05rem,4.4vw,1.25rem);line-height:1.45;color:#F6EFDF}
+
+  /* reading sections */
+  section{padding:36px 0 0}
+  h2{font-size:clamp(1.7rem,7vw,2.3rem);line-height:1.15;margin-bottom:14px;text-wrap:balance;text-align:center}
+  .center{text-align:center;text-wrap:balance}
+  p+p{margin-top:12px}
+  .parts{list-style:none;margin-top:26px;display:grid;gap:26px}
+  .parts li{display:grid;grid-template-columns:46px 1fr;gap:22px;align-items:start;padding-inline-start:8px}
+  .parts .n{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:'FbEinstein','Rubik',sans-serif;font-size:1.3rem;color:var(--cream-lift);background:radial-gradient(circle at 36% 30%,var(--terracotta-light) 0%,var(--orange) 45%,var(--orange-ink) 100%);box-shadow:0 0 0 6px rgba(224,90,0,.12),0 0 0 13px rgba(224,90,0,.06),0 8px 18px -6px rgba(224,90,0,.55)}
+  /* the sentence, word by word: dark card */
+  .words{margin-top:36px;padding:38px 22px 26px;border-radius:30px;color:var(--cream-warm);background:linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);background-image:radial-gradient(circle at 50% 22%,rgba(224,90,0,.2) 0%,rgba(42,27,7,0) 70%),linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);box-shadow:0 30px 60px -30px rgba(42,27,7,.75)}
+  .words h2{color:var(--cream-lift)}
+  .words>p{color:#E9E2CF}
+  .sentence{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 16px}
+  .part{font-family:'FbEinstein','Rubik',sans-serif;font-size:1.05rem;line-height:1.3;color:var(--cream-warm);background:transparent;border:1px solid rgba(224,192,141,.5);border-radius:999px;padding:9px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .16s var(--ease)}
+  .part:active{transform:scale(.97)}
+  .part[aria-selected="true"]{background:var(--sand-gold);color:var(--bark);border-color:var(--sand-gold)}
+  .part:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+  @media (hover:hover) and (pointer:fine){.part:hover{border-color:var(--sand-gold)}}
+  .meaning{background:rgba(224,192,141,.12);border-radius:18px;padding:16px 18px;min-height:150px;transition:opacity .2s var(--ease),filter .2s var(--ease)}
+  .meaning.swap{opacity:0;filter:blur(2px)}
+  .meaning b{display:block;color:var(--sand-gold);font-size:1.1rem;margin-bottom:6px}
+  .meaning p{margin:0;color:var(--cream-warm)}
+  .story{margin:16px 0 20px;font-family:'GveretLevin',cursive;font-size:clamp(1.4rem,5.8vw,1.6rem);line-height:1.55;color:var(--brown-2,#5A4220)}
+  .tips{list-style:none;margin-top:18px;display:grid;gap:14px}
+  .tips li{position:relative;padding-inline-start:26px}
+  .tips li::before{content:'';position:absolute;inset-inline-start:2px;top:.62em;width:11px;height:15px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;background:var(--sage-light);box-shadow:inset 0 0 0 1.5px var(--olive-deep)}
+  .promise{margin-top:30px;text-align:center;font-size:clamp(1.6rem,6.8vw,2.2rem);line-height:1.4;color:var(--orange-ink);text-wrap:balance}
+
+  /* call to action: WhatsApp green button on the dark card */
+  .cta{margin:4px 0 0;padding:32px 22px 28px;border-radius:30px;text-align:center;background:linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);color:#F6EFDF;box-shadow:0 30px 60px -30px rgba(42,27,7,.75)}
+  .cta h2{color:var(--cream-lift);font-size:clamp(1.55rem,6.4vw,2.1rem)}
+  .cta p{color:#E9E2CF;text-wrap:balance}
+  .btn{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:28px;padding:18px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:1.15rem;line-height:1.3;color:#EFE9D8;background:linear-gradient(135deg,#6C8830 0%,#6E7216 46%,#5B7328 100%);box-shadow:0 18px 38px -14px rgba(91,115,40,.55),0 3px 10px -4px rgba(91,115,40,.4),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .3s var(--ease),box-shadow .3s var(--ease);animation:nudge 2.6s var(--ease-soft) infinite}
+  .btn::before{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 0 rgba(108,136,48,.5);animation:pulse 2.6s var(--ease-soft) infinite;pointer-events:none}
+  .btn svg{width:28px;height:28px;flex:none}
+  .btn:active{transform:scale(.97)}
+  .btn:focus-visible{outline:3px solid var(--sand-gold);outline-offset:4px}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(108,136,48,.5)}70%,100%{box-shadow:0 0 0 16px rgba(108,136,48,0)}}
+  @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  @media (hover:hover) and (pointer:fine){.btn:hover{transform:translateY(-3px);box-shadow:0 22px 40px -14px rgba(91,115,40,.65),0 3px 10px -4px rgba(91,115,40,.4)}}
+  .cta .small{margin-top:14px;font-size:1rem;font-weight:500;color:var(--orange)}
+
+  footer{padding:24px 0 38px;text-align:center}
+  footer .script{display:block;font-size:1.9rem;line-height:1.35;color:var(--orange-ink)}
+
+  @media (prefers-reduced-motion:reduce){.fl,.btn,.btn::before{animation:none}.brandline{animation:none;clip-path:none}}
+  @media (min-width:760px){.hero{padding-top:56px}body{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <svg class="fl" style="top:2%;inset-inline-start:3%;width:60px;--r:-14deg;--t:19s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#3D5444" opacity="0.2"/><path d="M31,10 L31,82" stroke="#F8F5EE" stroke-width="1.6" opacity="0.14"/></svg>
+  <svg class="fl" style="top:6%;inset-inline-end:6%;width:44px;--r:-26deg;--t:17s;--d:.6s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#E0C08D" opacity="0.22"/><path d="M31,10 L31,82" stroke="#BF5732" stroke-width="1.5" opacity="0.22"/></svg>
+  <svg class="fl" style="top:33%;inset-inline-end:2%;width:54px;--r:16deg;--t:21s;--d:1.6s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#C0C7A5" opacity="0.24"/><path d="M31,10 L31,82" stroke="#7F7B4E" stroke-width="1.6" opacity="0.18"/></svg>
+  <svg class="fl" style="top:44%;inset-inline-start:2%;width:46px;--r:-20deg;--t:18s;--d:.4s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#CC8D69" opacity="0.2"/></svg>
+  <svg class="fl" style="top:57%;inset-inline-end:4%;width:40px;--r:22deg;--t:22s;--d:2s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#BF5732" opacity="0.16"/></svg>
+  <svg class="fl" style="top:66%;inset-inline-start:4%;width:58px;--r:12deg;--t:20s;--d:1s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#3D5444" opacity="0.18"/><path d="M31,10 L31,82" stroke="#F8F5EE" stroke-width="1.6" opacity="0.14"/></svg>
+  <svg class="fl" style="top:79%;inset-inline-end:3%;width:50px;--r:-18deg;--t:19s;--d:.8s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#E0C08D" opacity="0.24"/><path d="M31,10 L31,82" stroke="#BF5732" stroke-width="1.5" opacity="0.2"/></svg>
+  <svg class="fl" style="top:88%;inset-inline-start:5%;width:44px;--r:26deg;--t:23s;--d:1.4s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#C0C7A5" opacity="0.26"/><path d="M31,10 L31,82" stroke="#7F7B4E" stroke-width="1.6" opacity="0.18"/></svg>
+  <svg class="fl" style="top:95%;inset-inline-end:14%;width:36px;--r:-8deg;--t:18s;--d:2.4s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#CC8D69" opacity="0.2"/></svg>
+  <svg class="fl" style="bottom:3%;inset-inline-start:6%;width:54px;--r:18deg;--t:21s;--d:.3s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#3D5444" opacity="0.22"/><path d="M31,10 L31,82" stroke="#F8F5EE" stroke-width="1.6" opacity="0.14"/></svg>
+  <svg class="fl" style="bottom:1%;inset-inline-end:8%;width:46px;--r:-24deg;--t:19s;--d:1.2s" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#E0C08D" opacity="0.3"/><path d="M31,10 L31,82" stroke="#BF5732" stroke-width="1.5" opacity="0.22"/></svg>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1 class="display">המתנה שלך לפני<span class="turn">הדייט הראשון שלנו</span></h1>
+    <p class="sub"><span class="last">שיתפת אותי באומץ, והקלטתי לך 5&nbsp;משפטי טיהור שיכינו אותך לפגישה שלנו<svg class="brandline" viewBox="0 0 300 15" preserveAspectRatio="none" aria-hidden="true"><path d="M5,12.6 C60,4.6 110,1.8 150,1.8 C205,1.8 262,4.6 296,8.6 L296,9.5 C262,7.2 205,6.2 150,6.2 C110,6.2 60,8.8 5,13.5 Z"/></svg></span></p>
+  </div>
+  <div class="band band-top">
+    <div class="wrap">
+      <div class="shell shell-top"><div class="card"><div class="photo"><img src="lali-smile-rt.jpg" width="668" height="930" alt="ללי פיצ'חדזה מחייכת"></div></div></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2 class="display">מה זה משפט טיהור</h2>
+    <p class="center">יש בהקלטה 5&nbsp;משפטי טיהור. כל משפט מורכב מ-2 חלקים:</p>
+    <ol class="parts">
+      <li><span class="n">1</span><div>משפט שמכיל בתוכו אנרגיה או חסם שעלו מהשיתוף האמיץ שלך. המשפט הזה יכול להציף קצת או להעלות תחושות/מחשבות/שאלות, זה בדיוק התפקיד שלו.</div></li>
+      <li><span class="n">2</span><div>מנטרה ייעודית שייצרתי שהמילים שלה והשילוב ביניהן מפרק ומשחרר את מה שהמשפט הראשון מעלה.</div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="display">מה זה עושה</h2>
+    <p class="center">הקלטה מיוחדת שמתחילה לשחרר את החסמים שבתת המודע, עוד לפני שאנחנו נפגשות. השחרור עובד ומשחרר אנרגיה חוסמת ומעכבת.</p>
+  </section>
+
+  <div class="words">
+    <h2 class="display">משפט הטיהור, מילה אחרי מילה</h2>
+    <p>במשפט הטיהור יצרתי מילים עם תדר וקידוד עברי-יהודי. כל מילה בו היא סוג של קידוד. לא צריך להבין אותו לוגית כדי שיעבוד, אבל אם סקרן אותך, לחצי על כל חלק:</p>
+    <div class="sentence" role="tablist" aria-label="חלקי משפט הטיהור">
+      <button class="part" role="tab" aria-selected="true" data-i="0">חוקות</button>
+      <button class="part" role="tab" aria-selected="false" data-i="1">צמדי וצירי</button>
+      <button class="part" role="tab" aria-selected="false" data-i="2">ההיאחזות בקצוות ובמצור</button>
+      <button class="part" role="tab" aria-selected="false" data-i="3">מסכות העצמיות</button>
+      <button class="part" role="tab" aria-selected="false" data-i="4">הבריאה והחבלה</button>
+      <button class="part" role="tab" aria-selected="false" data-i="5">חורצי וקורעי שכר ועונש</button>
+      <button class="part" role="tab" aria-selected="false" data-i="6">ומהדהדי סודות הסתרים</button>
+      <button class="part" role="tab" aria-selected="false" data-i="7">מהמסד ועד הטפחות</button>
+    </div>
+    <div class="meaning" id="meaning" role="tabpanel" aria-live="polite"><b id="m-title"></b><p id="m-text"></p></div>
+  </div>
+
+  <section>
+    <h2 class="display">מה המשמעות שלו</h2>
+    <p>תחשבי שאמרו לך בגיל חמש: אל תלבשי סגול, זה לא יפה לך. אולי הפסקת ללבוש סגול, ואולי דווקא לבשת סגול כדי להוכיח שזה יפה לך. בשני המקרים מה שאמרו לך בגיל חמש הפך למציאות בחיים שלך, והוא עדיין מנהל אותך. משפט הטיהור מוריד את כל מה שאמרו לך על הצבע הסגול, כדי שבפעם הבאה שתראי חולצה סגולה תוכלי להחליט לפי מה שבא לך.</p>
+    <p>ועכשיו תחליפי את הסגול במשפט שגדלת עליו על אהבה ועל זוגיות. כמה פעמים שמעת אותו, והוא מנהל אותך עד היום?</p>
+  </section>
+
+  <section>
+    <h2 class="display">לפני שתקשיבי</h2>
+    <ul class="tips">
+      <li>ממליצה בפעם הראשונה לא להקשיב לזה בנהיגה ועדיף כשאת מודעת וערה (גם אם לא הכל מובן מבחינה שכלית/לוגית).</li>
+      <li>אחרי ההאזנה הראשונה אפשר לתת להקלטה לרוץ (אפילו בלופים), להוריד לה את הווליום/להשתיק וללכת לישון כשהיא ברקע - השחרור עובד ומשחרר אנרגיה חוסמת ומעכבת.</li>
+      <li>יכול להיות שיעלו רגשות עצובים/שליליים וזה טבעי. אם זה יימשך ויעורר תחושת הצפה/חוסר נוחות מוזמנת ליצור איתי קשר בכל שלב ובכל זמן ואסביר לך מה כדאי לעשות וגם נדבר.</li>
+    </ul>
+  </section>
+
+  <p class="promise script">מתרגשת לראות מה ייפתח אצלך, ועוד יותר לשמוע על זה בפגישה שלנו</p>
+</main>
+
+<div class="band band-end">
+  <div class="wrap">
+    <div class="shell">
+      <div class="card player" id="player">
+        <div class="photo"><img src="lali-mic-rt.jpg" width="840" height="886" alt="ללי פיצ'חדזה עם מיקרופון"></div>
+        <button class="play" id="play" type="button" aria-label="השמעת ההקלטה">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z"/></svg>
+        </button>
+        <div class="meta">
+          <div class="name">משפטי טיהור לקראת הפגישה</div>
+          <div class="what">5&nbsp;משפטים שמשחררים את החסמים שלך לזוגיות</div>
+          <input class="seek" type="range" id="seek" min="0" max="202.6" step="0.1" value="0" aria-label="מיקום בהקלטה">
+          <div class="time"><span id="cur">0:00</span><span id="dur">3:22</span></div>
+        </div>
+        <p class="no-audio" id="no-audio">ההקלטה לא נטענת בדפדפן הזה. אפשר לנסות לפתוח את הדף בדפדפן אחר.</p>
+      </div>
+    </div>
+    <audio id="gift" preload="none">
+      <source src="gift.ogg" type="audio/ogg; codecs=opus">
+      <source src="gift.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cta">
+    <h2 class="display">הקשבת? אשמח לשמוע מה הרגשת ומה עלה לך</h2>
+    <p>כל תחושה, מחשבה או שאלה שעלתה לך מחכה לי בוואטסאפ, ונמשיך מזה בפגישה שלנו.</p>
+    <a class="btn" id="cta" href="https://wa.me/972586180280">
+      <span>האזנתי, אני רוצה לספר לך</span>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3.2 29l6.5-1.7c1.9 1 4 1.6 6.3 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.7-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.6 16 26.6z"/><path fill="#fff" d="M21.9 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 2.8 1.1 3.4.9 4 .8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
+    </a>
+    <p class="small">ההודעה כבר מוכנה, רק לשלוח</p>
+  </div>
+</div>
+
+<footer>
+  <span class="script">באהבה,<br>עו"ד ללי פיצ'חדזה</span>
+</footer>
+
+<script>
+  var M=[
+    ["חוקות","חוקות זה כל החוקים וההגדרות שאמרתי מה מותר לי או אסור לי לעשות ולהיות."],
+    ["צמדי וצירי","צמדי זה כל הקוטביות הזאת של החיובי והשלילי, נכון או לא נכון, מותר או אסור. זה השכבות העמוקות של התודעה שהופכות ומכתיבות לך את כל הדברים."],
+    ["ההיאחזות בקצוות ובמצור","תפיסות, אמונות, מחשבות והשקפות שאנו מגנות עליהן או נמנעות מהן, שממשיכות לקבע אותנו."],
+    ["מסכות העצמיות","כל האמונות, הסיפורים והרכיבים של הזהות שאנחנו עוטות על עצמנו מול אנשים וסיטואציות, והופכות לזהות שלנו שאנחנו עוטות ומרכיבות כמו מסכה."],
+    ["הבריאה והחבלה","הנקודה שבה התחלנו ליצור או להרוס את המציאות שלנו לפי אירוע, מסקנה, חוויה או דברים שחווינו."],
+    ["חורצי וקורעי שכר ועונש","תחושה חדה או רגעית של קיפאון עמוק - כמו \"חתך\" במודעות, עצירה קיומית. קונפליקט פנימי בין משמעות לאי-משמעות, שכר ועונש."],
+    ["ומהדהדי סודות הסתרים","מתקשרת לפצעים עמוקים ולא מודעים שאינם נגישים ישירות, ברובד טרום-מילולי."],
+    ["מהמסד ועד הטפחות","בכל רמות הקיום - החל מהאלוקות והמקום הכי נשגב ונעלה שלי, ועד למקום הכי בסיסי ושורשי שלי."]
+  ];
+  var parts=document.querySelectorAll('.part'),box=document.getElementById('meaning'),mt=document.getElementById('m-title'),mx=document.getElementById('m-text');
+  function show(i,anim){
+    parts.forEach(function(q){q.setAttribute('aria-selected',q.dataset.i==i?'true':'false')});
+    function fill(){mt.textContent=M[i][0];mx.textContent=M[i][1];box.classList.remove('swap')}
+    if(anim&&!matchMedia('(prefers-reduced-motion: reduce)').matches){box.classList.add('swap');setTimeout(fill,160)}else fill();
+  }
+  parts.forEach(function(q){q.addEventListener('click',function(){show(+q.dataset.i,true)})});
+  show(0,false);
+
+  // player without native controls, so no browser shows a download button
+  var a=document.getElementById('gift'),btn=document.getElementById('play'),seek=document.getElementById('seek'),cur=document.getElementById('cur'),dur=document.getElementById('dur'),card=document.getElementById('player');
+  function t(s){s=Math.floor(s||0);return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+  btn.addEventListener('click',function(){if(a.paused){var p=a.play();if(p&&p.catch)p.catch(function(){})}else a.pause()});
+  a.addEventListener('play',function(){btn.classList.add('on');btn.setAttribute('aria-label','השהיית ההקלטה')});
+  a.addEventListener('pause',function(){btn.classList.remove('on');btn.setAttribute('aria-label','השמעת ההקלטה')});
+  a.addEventListener('loadedmetadata',function(){if(isFinite(a.duration)){seek.max=a.duration;dur.textContent=t(a.duration)}});
+  a.addEventListener('timeupdate',function(){seek.value=a.currentTime;cur.textContent=t(a.currentTime)});
+  seek.addEventListener('input',function(){a.currentTime=+seek.value;cur.textContent=t(seek.value)});
+  card.addEventListener('contextmenu',function(e){e.preventDefault()});
+  var srcs=a.querySelectorAll('source');
+  srcs[srcs.length-1].addEventListener('error',function(){card.querySelector('.photo').style.display='none';btn.style.display='none';card.querySelector('.meta').style.display='none';document.getElementById('no-audio').style.display='block'});
+  document.getElementById('cta').href='https://wa.me/972586180280?text='+encodeURIComponent('היי ללי, האזנתי להקלטה. רציתי לספר לך מה עלה לי:');
+</script>
+<!-- תפריט נגישות (30.10.2026). עצמאי: סגנון, כפתור, חלונית וסקריפט. מתאים לדף ההכנה ולדף הנחיתה. -->
+<style>
+.a11y-btn{position:fixed;inset-inline-start:14px;bottom:14px;z-index:9999;width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--brown,#442A19);color:#FAF9F4;box-shadow:0 8px 22px -8px rgba(0,0,0,.55);display:grid;place-items:center}
+.a11y-btn svg{width:30px;height:30px;fill:currentColor}
+/* סגירת כפתור הנגישות לביקור הנוכחי (בקשת ללי 30.10); חוזר בטעינה הבאה */
+.a11y-hide{position:fixed;inset-inline-start:52px;bottom:52px;z-index:10000;width:24px;height:24px;border-radius:50%;
+  border:1.5px solid #FAF9F4;background:#442A19;color:#FAF9F4;cursor:pointer;padding:0;display:grid;place-items:center;
+  font:700 15px/1 'Rubik',system-ui,sans-serif;box-shadow:0 4px 10px -4px rgba(0,0,0,.5)}
+.a11y-hide::before{content:"";position:absolute;inset:-10px}
+.a11y-hide:focus-visible{outline:3px solid #E05A00;outline-offset:2px}
+html.a11y-off .a11y-btn,html.a11y-off .a11y-hide,html.a11y-off .a11y-panel{display:none!important}
+.a11y-btn:focus-visible,.a11y-panel button:focus-visible{outline:3px solid #E05A00;outline-offset:3px}
+.a11y-panel{position:fixed;inset-inline-start:14px;bottom:76px;z-index:9999;width:min(300px,calc(100vw - 28px));
+  background:#FAF9F4;color:#442A19;border:1.5px solid rgba(224,192,141,.8);border-radius:16px;padding:14px;
+  box-shadow:0 18px 44px -16px rgba(68,42,25,.55);font-family:'Rubik',system-ui,sans-serif;direction:rtl}
+.a11y-panel[hidden]{display:none!important}
+.a11y-panel h2{font-family:'FbEinstein','Rubik',sans-serif;font-size:1.05rem;margin:0 0 10px;text-align:right;color:#442A19}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.a11y-panel button{min-height:44px;border-radius:12px;border:1.5px solid rgba(224,192,141,.8);background:#F7F3E8;color:#442A19;
+  font:600 .9rem 'Rubik',system-ui,sans-serif;cursor:pointer;padding:6px 8px;line-height:1.25}
+.a11y-panel button[aria-pressed="true"]{background:#442A19;color:#FAF9F4;border-color:#442A19}
+.a11y-panel .a11y-reset{grid-column:1/-1;background:transparent}
+html.a11y-contrast body{background:#fff!important;color:#000!important}
+html.a11y-contrast .bg-layers,html.a11y-contrast .flora,html.a11y-contrast .sleaves,html.a11y-contrast .video-band::after{display:none!important}
+html.a11y-contrast p,html.a11y-contrast h1,html.a11y-contrast h2,html.a11y-contrast h3,html.a11y-contrast span,html.a11y-contrast li,html.a11y-contrast label{color:#000!important;text-shadow:none!important}
+html.a11y-contrast .video-band p,html.a11y-contrast .video-band span{color:#fff!important}
+html.a11y-contrast .cta{background:#000!important;color:#fff!important}
+html.a11y-contrast .bg,html.a11y-contrast .band::after{display:none!important}
+/* הגדלת טקסט גם לרכיבים שהגודל שלהם קבוע בפיקסלים (טפסים, כפתורים, שורות קטנות) */
+html.a11y-big :is(.lform .cta,.lfield input,.sub,.consent label,.lform .ctanote,.play-line){zoom:var(--a11y-z,1)}
+html.a11y-big .sub{text-wrap:wrap!important;white-space:normal!important;margin-inline:0!important}
+html.a11y-big .play-line{white-space:normal!important}
+html.a11y-links a{text-decoration:underline!important;outline:2px dashed #E05A00;outline-offset:2px}
+html.a11y-readable body,html.a11y-readable body *:not(svg):not(path){font-family:'Rubik',sans-serif!important;letter-spacing:.01em}
+html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:none!important;transition:none!important}
+html.a11y-still .rv,html.a11y-still .rise,html.a11y-still .reveal{opacity:1!important;transform:none!important}
+</style>
+<button type="button" class="a11y-btn" id="a11yBtn" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm8 6.5-5.5 1.1V13l2 7.5a1 1 0 0 1-1.9.5L12.5 15h-1l-2.1 6a1 1 0 0 1-1.9-.5l2-7.5V9.6L4 8.5a1 1 0 0 1 .4-2l7.6 1.3 7.6-1.3a1 1 0 0 1 .4 2Z"/></svg>
+</button>
+<button type="button" class="a11y-hide" id="a11yHide" aria-label="סגירת כפתור הנגישות"><span aria-hidden="true">×</span></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="תפריט נגישות" hidden>
+  <h2>נגישות</h2>
+  <div class="a11y-grid">
+    <button type="button" data-a11y="bigger">הגדלת טקסט</button>
+    <button type="button" data-a11y="smaller">הקטנת טקסט</button>
+    <button type="button" data-a11y="contrast" aria-pressed="false">ניגודיות גבוהה</button>
+    <button type="button" data-a11y="links" aria-pressed="false">הדגשת קישורים</button>
+    <button type="button" data-a11y="readable" aria-pressed="false">גופן קריא</button>
+    <button type="button" data-a11y="still" aria-pressed="false">עצירת אנימציות</button>
+    <button type="button" class="a11y-reset" data-a11y="reset">איפוס הגדרות</button>
+  </div>
+</div>
+<script>
+(function(){
+  var root = document.documentElement, KEY = 'lali-a11y', state = {size:0, contrast:false, links:false, readable:false, still:false};
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) state = Object.assign(state, saved); } catch(e) {}
+  var btn = document.getElementById('a11yBtn'), panel = document.getElementById('a11yPanel');
+  function apply(){
+    root.style.fontSize = state.size ? (100 + state.size * 10) + '%' : '';
+    root.classList.toggle('a11y-big', state.size > 0);
+    root.style.setProperty('--a11y-z', String(1 + Math.max(state.size, 0) * 0.1));
+    ['contrast','links','readable','still'].forEach(function(k){
+      root.classList.toggle('a11y-' + k, !!state[k]);
+      var b = panel.querySelector('[data-a11y="' + k + '"]'); if (b) b.setAttribute('aria-pressed', state[k] ? 'true' : 'false');
+    });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+  }
+  btn.addEventListener('click', function(){
+    var open = panel.hasAttribute('hidden');
+    if (open) { panel.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); panel.querySelector('button').focus(); }
+    else { panel.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+  });
+  document.getElementById('a11yHide').addEventListener('click', function(){ root.classList.add('a11y-off'); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hasAttribute('hidden')) { panel.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); btn.focus(); } });
+  panel.addEventListener('click', function(e){
+    var b = e.target.closest('[data-a11y]'); if (!b) return;
+    var a = b.getAttribute('data-a11y');
+    if (a === 'bigger') state.size = Math.min(state.size + 1, 4);
+    else if (a === 'smaller') state.size = Math.max(state.size - 1, -2);
+    else if (a === 'reset') state = {size:0, contrast:false, links:false, readable:false, still:false};
+    else state[a] = !state[a];
+    apply();
+  });
+  apply();
+})();
+</script>
+
+</body>
+</html>
