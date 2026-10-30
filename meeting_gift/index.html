@@ -85,11 +85,14 @@
   .parts li{display:grid;grid-template-columns:46px 1fr;gap:22px;align-items:start;padding-inline-start:8px}
   .parts .n{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:'FbEinstein','Rubik',sans-serif;font-size:1.3rem;color:var(--cream-lift);background:radial-gradient(circle at 36% 30%,var(--terracotta-light) 0%,var(--orange) 45%,var(--orange-ink) 100%);box-shadow:0 0 0 6px rgba(224,90,0,.12),0 0 0 13px rgba(224,90,0,.06),0 8px 18px -6px rgba(224,90,0,.55)}
   /* the sentence, word by word: dark card */
-  .words{margin-top:36px;padding:38px 22px 26px;border-radius:30px;color:var(--cream-warm);background:linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);background-image:radial-gradient(circle at 50% 22%,rgba(224,90,0,.2) 0%,rgba(42,27,7,0) 70%),linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);box-shadow:0 30px 60px -30px rgba(42,27,7,.75)}
+  .words{position:relative;isolation:isolate;overflow:hidden;margin-top:36px;padding:38px 14px 26px;border-radius:30px;color:var(--cream-warm);background:linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);background-image:radial-gradient(circle at 50% 22%,rgba(224,90,0,.2) 0%,rgba(42,27,7,0) 70%),linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);box-shadow:0 30px 60px -30px rgba(42,27,7,.75)}
+  /* roots texture and leaves on the dark card (Lali 30.10: the branches disappeared here) */
+  .words::before{content:'';position:absolute;inset:0;z-index:-1;background:url('roots.jpg') center/cover no-repeat;opacity:.32;filter:saturate(.85) contrast(1.05);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0%,#000 30%,#000 70%,rgba(0,0,0,.35) 100%);mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0%,#000 30%,#000 70%,rgba(0,0,0,.35) 100%)}
+  .words .wl{position:absolute;z-index:-1;pointer-events:none}
   .words h2{color:var(--cream-lift)}
   .words>p{color:#E9E2CF}
-  .sentence{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 16px}
-  .part{font-family:'FbEinstein','Rubik',sans-serif;font-size:1.05rem;line-height:1.3;color:var(--cream-warm);background:transparent;border:1px solid rgba(224,192,141,.5);border-radius:999px;padding:9px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .16s var(--ease)}
+  .sentence{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:20px 0 16px}
+  .part{font-family:'FbEinstein','Rubik',sans-serif;font-size:.85rem;line-height:1.3;color:var(--cream-warm);background:transparent;border:1px solid rgba(224,192,141,.5);border-radius:999px;padding:6px 11px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .16s var(--ease)}
   .part:active{transform:scale(.97)}
   .part[aria-selected="true"]{background:var(--sand-gold);color:var(--bark);border-color:var(--sand-gold)}
   .part:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
@@ -168,6 +171,10 @@
   </section>
 
   <div class="words">
+    <svg class="wl" aria-hidden="true" style="top:-14px;inset-inline-end:-10px;width:58px;transform:rotate(-28deg)" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#E0C08D" opacity="0.38"/><path d="M31,10 L31,82" stroke="#BF5732" stroke-width="1.5" opacity="0.38"/></svg>
+    <svg class="wl" aria-hidden="true" style="top:30px;inset-inline-end:30px;width:30px;transform:rotate(14deg)" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#C0C7A5" opacity="0.3"/><path d="M31,10 L31,82" stroke="#7F7B4E" stroke-width="1.5" opacity="0.3"/></svg>
+    <svg class="wl" aria-hidden="true" style="bottom:-16px;inset-inline-start:-8px;width:62px;transform:rotate(24deg)" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#E0C08D" opacity="0.34"/><path d="M31,10 L31,82" stroke="#BF5732" stroke-width="1.5" opacity="0.34"/></svg>
+    <svg class="wl" aria-hidden="true" style="bottom:34px;inset-inline-start:34px;width:28px;transform:rotate(-16deg)" viewBox="0 0 62 92"><path d="M31,2 C58,26 58,62 31,90 C4,62 4,26 31,2Z" fill="#CC8D69" opacity="0.3"/><path d="M31,10 L31,82" stroke="#BF5732" stroke-width="1.5" opacity="0.3"/></svg>
     <h2 class="display">משפט הטיהור, מילה אחרי מילה</h2>
     <p>במשפט הטיהור יצרתי מילים עם תדר וקידוד עברי-יהודי. כל מילה בו היא סוג של קידוד. לא צריך להבין אותו לוגית כדי שיעבוד, אבל אם סקרן אותך, לחצי על כל חלק:</p>
     <div class="sentence" role="tablist" aria-label="חלקי משפט הטיהור">
