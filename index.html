@@ -1410,5 +1410,92 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
   }
 })();
 </script>
+<!-- תפריט נגישות (30.10.2026). עצמאי: סגנון, כפתור, חלונית וסקריפט. מתאים לדף ההכנה ולדף הנחיתה. -->
+<style>
+.a11y-btn{position:fixed;inset-inline-start:14px;bottom:14px;z-index:9999;width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--brown,#442A19);color:#FAF9F4;box-shadow:0 8px 22px -8px rgba(0,0,0,.55);display:grid;place-items:center}
+.a11y-btn svg{width:30px;height:30px;fill:currentColor}
+/* סגירת כפתור הנגישות לביקור הנוכחי (בקשת ללי 30.10); חוזר בטעינה הבאה */
+.a11y-hide{position:fixed;inset-inline-start:52px;bottom:52px;z-index:10000;width:24px;height:24px;border-radius:50%;
+  border:1.5px solid #FAF9F4;background:#442A19;color:#FAF9F4;cursor:pointer;padding:0;display:grid;place-items:center;
+  font:700 15px/1 'Rubik',system-ui,sans-serif;box-shadow:0 4px 10px -4px rgba(0,0,0,.5)}
+.a11y-hide:focus-visible{outline:3px solid #E05A00;outline-offset:2px}
+html.a11y-off .a11y-btn,html.a11y-off .a11y-hide,html.a11y-off .a11y-panel{display:none!important}
+.a11y-btn:focus-visible,.a11y-panel button:focus-visible{outline:3px solid #E05A00;outline-offset:3px}
+.a11y-panel{position:fixed;inset-inline-start:14px;bottom:76px;z-index:9999;width:min(300px,calc(100vw - 28px));
+  background:#FAF9F4;color:#442A19;border:1.5px solid rgba(224,192,141,.8);border-radius:16px;padding:14px;
+  box-shadow:0 18px 44px -16px rgba(68,42,25,.55);font-family:'Rubik',system-ui,sans-serif;direction:rtl}
+.a11y-panel[hidden]{display:none!important}
+.a11y-panel h2{font-family:'FbEinstein','Rubik',sans-serif;font-size:1.05rem;margin:0 0 10px;text-align:right;color:#442A19}
+.a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.a11y-panel button{min-height:44px;border-radius:12px;border:1.5px solid rgba(224,192,141,.8);background:#F7F3E8;color:#442A19;
+  font:600 .9rem 'Rubik',system-ui,sans-serif;cursor:pointer;padding:6px 8px;line-height:1.25}
+.a11y-panel button[aria-pressed="true"]{background:#442A19;color:#FAF9F4;border-color:#442A19}
+.a11y-panel .a11y-reset{grid-column:1/-1;background:transparent}
+html.a11y-contrast body{background:#fff!important;color:#000!important}
+html.a11y-contrast .bg-layers,html.a11y-contrast .flora,html.a11y-contrast .sleaves,html.a11y-contrast .video-band::after{display:none!important}
+html.a11y-contrast p,html.a11y-contrast h1,html.a11y-contrast h2,html.a11y-contrast h3,html.a11y-contrast span,html.a11y-contrast li,html.a11y-contrast label{color:#000!important;text-shadow:none!important}
+html.a11y-contrast .video-band p,html.a11y-contrast .video-band span{color:#fff!important}
+html.a11y-contrast .cta{background:#000!important;color:#fff!important}
+/* הגדלת טקסט גם לרכיבים שהגודל שלהם קבוע בפיקסלים (טפסים, כפתורים, שורות קטנות) */
+html.a11y-big :is(.lform .cta,.lfield input,.sub,.consent label,.lform .ctanote,.play-line){zoom:var(--a11y-z,1)}
+html.a11y-big .sub{text-wrap:wrap!important;white-space:normal!important;margin-inline:0!important}
+html.a11y-big .play-line{white-space:normal!important}
+html.a11y-links a{text-decoration:underline!important;outline:2px dashed #E05A00;outline-offset:2px}
+html.a11y-readable body,html.a11y-readable body *:not(svg):not(path){font-family:Arial,'Rubik',sans-serif!important;letter-spacing:.01em}
+html.a11y-still *,html.a11y-still *::before,html.a11y-still *::after{animation:none!important;transition:none!important}
+html.a11y-still .rv,html.a11y-still .rise,html.a11y-still .reveal{opacity:1!important;transform:none!important}
+</style>
+<button type="button" class="a11y-btn" id="a11yBtn" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm8 6.5-5.5 1.1V13l2 7.5a1 1 0 0 1-1.9.5L12.5 15h-1l-2.1 6a1 1 0 0 1-1.9-.5l2-7.5V9.6L4 8.5a1 1 0 0 1 .4-2l7.6 1.3 7.6-1.3a1 1 0 0 1 .4 2Z"/></svg>
+</button>
+<button type="button" class="a11y-hide" id="a11yHide" aria-label="סגירת כפתור הנגישות"><span aria-hidden="true">×</span></button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="תפריט נגישות" hidden>
+  <h2>נגישות</h2>
+  <div class="a11y-grid">
+    <button type="button" data-a11y="bigger">הגדלת טקסט</button>
+    <button type="button" data-a11y="smaller">הקטנת טקסט</button>
+    <button type="button" data-a11y="contrast" aria-pressed="false">ניגודיות גבוהה</button>
+    <button type="button" data-a11y="links" aria-pressed="false">הדגשת קישורים</button>
+    <button type="button" data-a11y="readable" aria-pressed="false">גופן קריא</button>
+    <button type="button" data-a11y="still" aria-pressed="false">עצירת אנימציות</button>
+    <button type="button" class="a11y-reset" data-a11y="reset">איפוס הגדרות</button>
+  </div>
+</div>
+<script>
+(function(){
+  var root = document.documentElement, KEY = 'lali-a11y', state = {size:0, contrast:false, links:false, readable:false, still:false};
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) state = Object.assign(state, saved); } catch(e) {}
+  var btn = document.getElementById('a11yBtn'), panel = document.getElementById('a11yPanel');
+  function apply(){
+    root.style.fontSize = state.size ? (100 + state.size * 10) + '%' : '';
+    root.classList.toggle('a11y-big', state.size > 0);
+    root.style.setProperty('--a11y-z', String(1 + Math.max(state.size, 0) * 0.1));
+    ['contrast','links','readable','still'].forEach(function(k){
+      root.classList.toggle('a11y-' + k, !!state[k]);
+      var b = panel.querySelector('[data-a11y="' + k + '"]'); if (b) b.setAttribute('aria-pressed', state[k] ? 'true' : 'false');
+    });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+  }
+  btn.addEventListener('click', function(){
+    var open = panel.hasAttribute('hidden');
+    if (open) { panel.removeAttribute('hidden'); btn.setAttribute('aria-expanded','true'); panel.querySelector('button').focus(); }
+    else { panel.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); }
+  });
+  document.getElementById('a11yHide').addEventListener('click', function(){ root.classList.add('a11y-off'); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hasAttribute('hidden')) { panel.setAttribute('hidden',''); btn.setAttribute('aria-expanded','false'); btn.focus(); } });
+  panel.addEventListener('click', function(e){
+    var b = e.target.closest('[data-a11y]'); if (!b) return;
+    var a = b.getAttribute('data-a11y');
+    if (a === 'bigger') state.size = Math.min(state.size + 1, 4);
+    else if (a === 'smaller') state.size = Math.max(state.size - 1, -2);
+    else if (a === 'reset') state = {size:0, contrast:false, links:false, readable:false, still:false};
+    else state[a] = !state[a];
+    apply();
+  });
+  apply();
+})();
+</script>
+
 </body>
 </html>
