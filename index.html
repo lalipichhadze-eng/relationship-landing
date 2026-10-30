@@ -1419,9 +1419,10 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
 .a11y-hide{position:fixed;inset-inline-start:52px;bottom:52px;z-index:10000;width:24px;height:24px;border-radius:50%;
   border:1.5px solid #FAF9F4;background:#442A19;color:#FAF9F4;cursor:pointer;padding:0;display:grid;place-items:center;
   font:700 15px/1 'Rubik',system-ui,sans-serif;box-shadow:0 4px 10px -4px rgba(0,0,0,.5)}
-.a11y-hide:focus-visible{outline:3px solid #E05A00;outline-offset:2px}
+.a11y-hide:focus-visible{outline:2px solid #442A19;outline-offset:2px}
 html.a11y-off .a11y-btn,html.a11y-off .a11y-hide,html.a11y-off .a11y-panel{display:none!important}
-.a11y-btn:focus-visible,.a11y-panel button:focus-visible{outline:3px solid #E05A00;outline-offset:3px}
+/* סימון פוקוס עדין בצבע המותג, רק בניווט מקלדת (בקשת ללי 30.10; נדרש לפי WCAG 2.4.7) */
+.a11y-btn:focus-visible,.a11y-panel button:focus-visible{outline:2px solid #442A19;outline-offset:2px}
 .a11y-panel{position:fixed;inset-inline-start:14px;bottom:76px;z-index:9999;width:min(300px,calc(100vw - 28px));
   background:#FAF9F4;color:#442A19;border:1.5px solid rgba(224,192,141,.8);border-radius:16px;padding:14px;
   box-shadow:0 18px 44px -16px rgba(68,42,25,.55);font-family:'Rubik',system-ui,sans-serif;direction:rtl}
