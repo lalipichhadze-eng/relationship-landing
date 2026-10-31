@@ -802,6 +802,49 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
 .pm-short .tquote{font-size:clamp(1.02rem,2vw,1.2rem);margin:12px 4px 6px}
 .pm-short .tname{margin:0 4px}
 @media (max-width:640px){.pm-stats{grid-template-columns:1fr}.pm-shorts{grid-template-columns:1fr;max-width:340px}}
+/* רקע חום כהה לכרטיסי עדויות התמונה, כדי להבדיל סיפורי זוגיות מעדויות הווידאו (אושר בידי ללי 30.10):
+   קרם על #3A2707 בניגודיות 13:1, צהוב בניגודיות 10:1 */
+.testi.pm-dark{background:#3A2707;box-shadow:0 22px 52px -26px rgba(42,27,7,.6),0 3px 10px -5px rgba(42,27,7,.3)}
+.testi.pm-dark .tquote{color:#FFD15F}
+.testi.pm-dark .tbody{color:#F9F5E3}
+.testi.pm-dark .tname{color:#F9F5E3;border-top-color:rgba(249,245,227,.22)}
+/* בר ואהובה בסקשן נפרד אחרי השאלון, עם מרקר כמו בדף הנחיתה (בקשות ללי 30.10 ו-31.10) */
+.pm-after-cta .marker{margin:0 auto clamp(10px,1.2vw,14px)}
+/* הפרדה משמעותית וברורה משלב 2 ומשלב 3 (בקשת ללי 31.10): רצועה בגוון חול, קו עליון ותחתון ומרווח גדול */
+.pad.pm-after-cta{background:#E2D3BA;border-block:1.5px solid rgba(192,133,82,.6);
+  padding:clamp(40px,5vw,64px) 0;margin-block:clamp(14px,2vw,24px)}
+.pm-after-cta .testi{margin-top:0!important} /* רווח קטן בין הכותרת למסגרת (בקשת ללי 31.10) */
+/* מה שמתחת לסרטונים קטן ופחות עמוס: בר ואהובה, ואחר כך גם יהודית ולנה (בקשות ללי 31.10) */
+.pm-vcol .tquote{font-size:clamp(.98rem,1.8vw,1.1rem);line-height:1.35;margin-top:10px}
+.pm-vcol .tname{font-size:.92rem;margin-top:6px;padding-top:5px}
+.testi.pm-vpair{padding-bottom:14px}
+/* רותם: סרטון אחד גדול לרוחב הכרטיס, ראשונה בשלב 1 (ללי 31.10) */
+.testi.pm-vfeature{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding-bottom:16px}
+.pm-vfeature .pm-vwrap{width:min(340px,100%)}
+.pm-vfeature .tquote{font-size:clamp(1.05rem,2vw,1.2rem);line-height:1.35;margin:0;max-width:30ch}
+.pm-after-cta .testi+.testi{margin-top:clamp(12px,1.6vw,18px)!important}
+.pm-after-cta .head h2{font-size:clamp(1.3rem,3vw,1.75rem)}
+/* צמצום מרווחים בטלפון (בקשת ללי 30.10: "יותר מדי עמוס") */
+@media (max-width:640px){
+  .pad{padding:20px 0}
+  .head{margin-bottom:16px}
+  .col.anchor > .testi:first-child{margin-top:0}
+  .testi{padding:18px 16px;gap:12px}
+  .testi+.testi{margin-top:12px}
+}
+/* כפתור צף שמוביל לשאלון: חץ למטה כשהכפתור מתחת, למעלה כשעברה אותו; נעלם כשהכפתור על המסך */
+.pm-jump{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;
+  display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:0;border-radius:999px;cursor:pointer;
+  background:#3A2707;color:#F9F5E3;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;line-height:1;white-space:nowrap;
+  box-shadow:0 0 0 1.5px rgba(255,209,95,.7),0 12px 26px -12px rgba(42,27,7,.7);transform:translate(-50%,0);opacity:1;
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.pm-jump[hidden]{display:inline-flex;opacity:0;transform:translate(-50%,140%);pointer-events:none}
+.pm-jump svg{width:1.15em;height:1.15em;fill:none;stroke:#FFD15F;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;animation:pmBob 1.8s var(--ease-soft) infinite}
+.pm-jump.up svg{transform:rotate(180deg);animation-name:pmBobUp}
+.pm-jump:focus-visible{outline:3px solid #E05A00;outline-offset:3px}
+@keyframes pmBob{0%,100%{translate:0 0}50%{translate:0 3px}}
+@keyframes pmBobUp{0%,100%{translate:0 0}50%{translate:0 -3px}}
+@media (prefers-reduced-motion:reduce){.pm-jump svg{animation:none}.pm-jump{transition:none}}
 </style>
 </head>
 <body>
@@ -842,10 +885,9 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
       <p class="pm-watch rise" style="--ad:.2s">צפי בסרטון לפני הפגישה שלנו</p>
       <div class="pm-chevrons rise" style="--ad:.25s" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6l7 6 7-6M5 13l7 6 7-6"/></svg></div>
       <div class="video-shell rise" style="--ad:.3s">
-        <div class="video-card pm-video-card" id="video" aria-label="לצפייה בסרטון ההכנה">
-          <div class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></div>
-          <span class="pm-vlabel">לצפייה בסרטון ההכנה</span>
-          <span class="pm-note">מקום שמור: הסרטון יעלה אחרי הצילום</span>
+        <!-- סרטון ההכנה, final 5 (אושר בידי ללי 31.10), ב-Vimeo של ללי כמוסתר (unlisted); מתנגן בלחיצה -->
+        <div class="video-card has-video" id="video" aria-label="סרטון ההכנה לפגישה">
+          <iframe src="https://player.vimeo.com/video/1241513073?h=2a66ad125d&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="סרטון ההכנה לפגישה"></iframe>
         </div>
       </div>
       <p class="pm-band-lead">בסרטון אני מסבירה מה נעשה בפגישה ואיך להגיע אליה מוכנה, כדי שנוכל להקדיש את השיחה למה שמעסיק אותך.</p>
@@ -875,8 +917,7 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
   <div class="wrap">
     <div class="head rv"><span class="pm-step">שלב 1 מתוך 3</span><h2>נשים שכבר שברו את הלופ ונכנסו לזוגיות</h2></div>
     <div class="col anchor">
-      <div class="testi pm-pending rv" style="--i:0"><span class="pm-note">מקום שמור: ריכוז הסרטונים והסיפורים של דקלה ורותם</span></div>
-      <div class="testi rv" style="--i:1">
+      <div class="testi pm-dark rv" style="--i:1">
         <img class="tphoto" src="data:image/jpeg;base64,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" alt="נטע-לי" width="97" height="149">
         <div><p class="tquote">"הייתי בטוחה שבגלל שאני גרה באירופה אין סיכוי שאמצא גבר יהודי..."</p>
         <p class="tbody">נטע-לי שחררה את המשקעים מהאקס הרעיל שניהל אותה בסתר, עשתה עלייה לארץ, ותוך זמן קצר הכירה את בן הזוג שלה. כיום הם בזוגיות מאושרת ויציבה.</p><p class="tname">- נטע-לי</p></div>
@@ -894,34 +935,58 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
             <video src="videos/lena.mp4" poster="videos/lena.jpg" playsinline preload="none" aria-label="העדות של לנה"></video>
             <button type="button" class="pm-vplay" aria-label="הפעלת העדות של לנה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
           </div>
-          <p class="tquote">"לא ניסיתי דבר כזה אף פעם, ולגמרי הרגשתי שמשהו קורה בתוכי. קיבלתי תחושה של ריפוי שלא חוויתי אף פעם"</p><p class="tname">- לנה</p>
+          <p class="tquote">"קיבלתי תחושה של ריפוי שלא חוויתי אף פעם"</p><p class="tname">- לנה</p>
         </div>
       </div>
-      <div class="testi rv" style="--i:3">
+      <div class="testi pm-dark rv" style="--i:3">
         <img class="tphoto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAACVCAMAAAB/22SeAAADAFBMVEXQGSSVl4+zFRuopZFISErHFB2mqq51d2/GpZjVJCyvtLeymImHiolVVVNuaFaMh3PDmY5QNiq0usT28+xnameuiG9xV0ewmHS7wszKq6JqSDeWFBmNZ0w3OUQNDA7DytQWExWVdleYlHe1GiLjJjKcoqc5KCJYRDb39O2YnKM3IxyRCxKmd1N2c1yMempILCSJVzkoGhjP1+XQsqeronlnOimrDRW1jILlNDuveWzrRkhLBw2oa0p9gXfM0tpzUjyLW0TvVlXKDhudoJarg1x8goXGi4Tt6uF3fIJHJxyWHCHVNTjgHiw3NDduCQ/28+xZXGHrPEKOg12zJypsS0I+QElSFRmGSzPLd22xV0+0sZbRV1DLhHj28+w2CQ5dYmaUa2bRSkb4XWKUYj3OZVfsaWptFReRJSahaj3ImnrBonpAPkOra2XGw7f28+xvKCe4NTfMRD3Jspvqd3Pp2NDo5Nv18uswHyCHNDbUame8R0fIzuDx7eVbYV9xXGCORUW4PUC9pIS2ucTWOkLNcV3ZyLLFytfqZFvx7eX39O0eGiBcUDxtHyeLJB+eP0GlUD66nqC8wL7RDyHBo3/DrJHLzdTd3d/M0d3e3dze4OXgj4Dpqajpwr3l3M7r5dnr6eUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD5KuRTAAABAHRSTlP////+///+/////v/////////+/v////7+/////////v///////v//BP///////////////v//////////////////////////////////UP////////////////+w////////////////+v///yr////8////bv//////j//////V2f//qc//xIT////////////Ivr2VvciW////yKWlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFoWKkQAAGoVJREFUeNrdmudj20iSxQFCBEgAIigeQVIUPTQpQzxqJChaaURJtiRbs7LHco7jMLYn7c7OTtyZDbc5Xc45/Kv3XnUDBGXffbpP15Yoiqbq11WvqroboPHH6bj27h/9X413rw3NGv+fCN+/9of/+NyyXdfu+33btt1Ko/3jdqPRqGC0+aNRcaMo4v+4btSXYfqm6eO7H0WVdqVi4yW7jfHPf7j2/VOE71/7yW/+7uN63QLBi82IiEZ7ud1uuC5sNyoE2X3TNO2KaxOKGTRsEADgy2alYdsm/rDRxpsbv/2XrxOGIlz7+je/qNc/rn8MgusFvulWbBrG3F15gp+VCiZuR32i5X/abRcm+75JUIQJ2OS328s78OK3//SPX19LCXDg7+scHxcKlr3iBZ4JFxgnBMbmH9GDBkzAN8SD8YKvCBmInD88QWD79JzTktH45T/8RNwwrl279vV//kIA9VUQPKsehvCcb6ZlIcAiAZXI7NNOG1/tSr8Pv0whwAvfpwgNzgb2K5hf5Zf/9TWsG+++++7vLVgP66urqxbN18O5EF4gUow9lQWALjDU8gLEgRXEr+HStOkfmq4tvmA6JDQwFf7572HdQG5Z9dV6vRPWk3FwUPc8z6fPiapKWsapj2SDg0gDZFrFZTr1fce3wepjIhQQwY34cmS3YR2EFdoOhRAqDB49L7BszltlEgTn/PuMHp/abvvHkmAQ27Z9xzlkrCoyKeUwYmhHlR0SvmrBeBiGN2C3MyeC4xvh8jyZfVuEhsh4YLYiSDS0s8xwNyomiH0bsYLPEf4Xc6FoFb6MpLgMgtXpdEIO2JVnIFgkhJ6tU4rK4aeqB8ySFUnzqECXAtjMV74ZkeqzKKg8a7MBJ4zLnbAFxtxcyFDNCWnV8hixEJFCQjI721SE9Y4Joi6QmhJu6An7ptS2ySKCJ0iqSnTYVzNr25eNTzph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" alt="מור" width="97" height="149">
         <div><p class="tquote">"הייתי בטוחה שאין לי כימיה עם אף אחד מה'בחורים הטובים'..."</p>
         <p class="tbody">מור הבינה איך הקשר המורכב עם אמא שלה גרם לה לחתוך מכל גבר רציני. היא יישמה את שיטת תכונות הליבה, נתנה הזדמנות אמיתית, והיום היא נשואה לאהבת חייה.</p><p class="tname">- מור</p></div>
       </div>
-      <div class="testi pm-vpair rv" style="--i:4">
-        <div class="pm-vcol">
-          <div class="pm-vwrap">
-            <video src="videos/bar.mp4" poster="videos/bar.jpg" playsinline preload="none" aria-label="העדות של בר"></video>
-            <button type="button" class="pm-vplay" aria-label="הפעלת העדות של בר"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
-          </div>
-          <p class="tquote">"למדתי לקחת החלטות יותר קלות שיעזרו לי יותר"</p><p class="tname">- בר</p>
-        </div>
-        <div class="pm-vcol">
-          <div class="pm-vwrap">
-            <video src="videos/ahuva.mp4" poster="videos/ahuva.jpg" playsinline preload="none" aria-label="העדות של אהובה"></video>
-            <button type="button" class="pm-vplay" aria-label="הפעלת העדות של אהובה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
-          </div>
-          <p class="tquote">"הגעתי עם שאלה שהובלת אותי לתשובה, שאני אפילו לא תיארתי לעצמי שנגיע לשם"</p><p class="tname">- אהובה</p>
-        </div>
-      </div>
-      <div class="testi rv" style="--i:5">
+      <div class="testi pm-dark rv" style="--i:5">
         <img class="tphoto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGEAAACVCAMAAAB/22SeAAADAFBMVEUlRmsTN1VwOCxaKBdjLBqKRzCvZ0n7x634t5RHaI/SiGgcQmcZPGLIeVYQJjnnmHPxqImVVTcyU3dpMx328+yNWE54Qy8sOkkaZmq3dVNIFhaoWDlXJyn0uaowNTetd24FBgbYlG9RdJg0dHBRVk47XIMyQ1IPR1N2R0WVYlMXWmP39O1Xe6POgl1ISUr907doKioNK0UwWFLto3sramiEOy4MHDFwGijumIzPl41UFyKYaWVMSC5IenOMS0VuV0wVVVwyDA5SNTAzYlvMeW781cUTFgvWpZX7w5uoXEfii2w1NxhOZXHCa0k4EhNagadsZ1QoKBS1hXe0iYXLi4Tt6eEpKzapa2Xqi4RWVDFLWmghPmL28+z7zMNZMxzUqqLuq6NtZ2+xlZB2dHMXMjuyYT5GRh1QY1aOdm739O2Phou7gV0dIRBmhKf28+xEN0R2UjqDIy08QRt6clscYV0+YYdSDiSgTDDHbmkdcHE8QTRBXoNwXGKUdFfSs6rY2tHk4trt7Ob28+xtZTpxdYN2g45tiqx5lLKdYD6PeoSLhnKYmJy6nKHaonnlfHk3HCFGDxlFSlNzP0Ful5KBHy2Poreyopu0t7CsusraspDQwbjhglvs6uT28+wHDyAjL0VWXGBNgn5kHh9gf6Z/gICXiFeLj5GGnLeApJ6ZrMOiS0qlpqWrqKW+vrypt8avwbq+xs7Tz8fW1dHK0dnf4eHl497q6uYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjQddYAAABAHRSTlP///////////////////7///////7///7////////+/////v/+////////BP7//v//////////////////////////////////////////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" alt="שני" width="97" height="149">
         <div><p class="tquote">"הגעתי לאמצע שנות ה-30 בתחושת תקיעות מוחלטת..."</p>
         <p class="tbody">שני ניקתה את המילים הארסיות שסחבה מקשר קודם. תוך 8 חודשים מהתהליך היא התארסה, ותוך פחות משנה הפכה לאמא.</p><p class="tname">- שני</p></div>
+      </div>
+<!-- דקלה ורותם יחד, ממש לפני כפתור השאלון (ללי 31.10: "כל מה שקשור לדקלה/רותם אתה מעביר למרכז וזה מה שיופיע לפני כפתור השאלון") -->
+      <div class="testi pm-vfeature rv" style="--i:6">
+        <div class="pm-vwrap">
+            <video src="videos/rotem.mp4" poster="videos/rotem.jpg" playsinline preload="none" aria-label="עדות מתוך פגישה"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת עדות מתוך פגישה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+        <p class="tquote">היא רק צפתה בהדרכה וסגרה מעגל של 5 שנים</p>
+      </div>
+      <div class="testi pm-vpair rv" style="--i:7">
+        <div class="pm-vcol">
+          <div class="pm-vwrap">
+            <video src="videos/dikla-week.mp4" poster="videos/dikla-week.jpg" playsinline preload="none" aria-label="עדות מתוך פגישה"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת עדות מתוך פגישה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+          <p class="tquote">שבוע אחד עשה מה שטיפול שלם לא עשה</p>
+        </div>
+        <div class="pm-vcol">
+          <div class="pm-vwrap">
+            <video src="videos/dikla-redline.mp4" poster="videos/dikla-redline.jpg" playsinline preload="none" aria-label="עדות מתוך פגישה"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת עדות מתוך פגישה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+          <p class="tquote">בזכות הפגישה אני מבינה: זה קו אדום אצלי</p>
+        </div>
+      </div>
+      <div class="testi pm-vpair rv" style="--i:8">
+        <div class="pm-vcol">
+          <div class="pm-vwrap">
+            <video src="videos/dikla-myself.mp4" poster="videos/dikla-myself.jpg" playsinline preload="none" aria-label="עדות מתוך פגישה"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת עדות מתוך פגישה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+          <p class="tquote">באתי בשביל זוגיות ומצאתי את עצמי</p>
+        </div>
+        <div class="pm-vcol">
+          <div class="pm-vwrap">
+            <video src="videos/dikla-exactly.mp4" poster="videos/dikla-exactly.jpg" playsinline preload="none" aria-label="עדות מתוך פגישה"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת עדות מתוך פגישה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+          <p class="tquote">ניתחת את מה שאמרתי, בדיוק מי שאני</p>
+        </div>
       </div>
     </div>
   </div>
@@ -932,8 +997,32 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
   <div class="wrap">
     <div class="head rv"><span class="pm-step">שלב 2 מתוך 3</span><h2>מלאי את שאלון ההיכרות כדי לאשר את הפגישה שלנו</h2></div>
     <div class="col"><p class="lead rv">התשובות שלך יעזרו לי להבין מה מעסיק אותך ולהגיע מוכנה לשיחה שלנו. כתבי בכנות, במילים שלך, ופני לעצמך כמה דקות לענות בנחת.</p></div>
-    <div class="ctarow rv"><a class="cta pm-cta-arrow" href="https://forms.gle/ynifvW6W7wXTYZAX8" target="_blank" rel="noopener">למילוי שאלון ההיכרות<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a></div>
+    <div class="ctarow rv"><a class="cta pm-cta-arrow" id="pm-form-cta" href="https://forms.gle/ynifvW6W7wXTYZAX8" target="_blank" rel="noopener">למילוי שאלון ההיכרות<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a></div>
     <div class="col"><p class="lead rv" style="margin-top:clamp(18px,2.4vw,26px)">אחרי מילוי השאלון הפגישה תאושר. כתבי לי בוואטסאפ כשסיימת, כדי שאוכל לשלוח לך את המתנה שתכין אותך לפגישה.</p></div>
+  </div>
+</section>
+
+<section class="pad pm-after-cta">
+  <div class="wrap">
+    <p class="marker rv"><span>ככה זה מרגיש מבפנים</span></p>
+    <div class="col">
+      <div class="testi pm-vpair rv" style="--i:0">
+        <div class="pm-vcol">
+          <div class="pm-vwrap">
+            <video src="videos/bar.mp4" poster="videos/bar.jpg" playsinline preload="none" aria-label="העדות של בר"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת העדות של בר"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+          <p class="tquote">"אני כל כך שמחה שנכנסתי לתהליך"</p><p class="tname">- בר</p>
+        </div>
+        <div class="pm-vcol">
+          <div class="pm-vwrap">
+            <video src="videos/ahuva.mp4" poster="videos/ahuva.jpg" playsinline preload="none" aria-label="העדות של אהובה"></video>
+            <button type="button" class="pm-vplay" aria-label="הפעלת העדות של אהובה"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+          </div>
+          <p class="tquote">"הובלת אותי לתשובה שאפילו לא תיארתי לעצמי"</p><p class="tname">- אהובה</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -963,9 +1052,24 @@ p.tname{margin-top:10px;padding-top:8px;border-top:1px solid rgba(97,71,54,.16)}
   </div>
 </section>
 
+<button type="button" class="pm-jump" id="pm-jump" hidden>לשאלון ההיכרות<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+
 <script>
 (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // floating guide to the form button: hidden while the button is on screen or at the very top of the page
+  var jump = document.getElementById('pm-jump'), cta = document.getElementById('pm-form-cta');
+  if (jump && cta) {
+    var place = function(){
+      var r = cta.getBoundingClientRect(), h = window.innerHeight;
+      var onScreen = r.bottom > 0 && r.top < h, atTop = window.scrollY < h * 0.35;
+      var off = onScreen || atTop;
+      jump.hidden = off; jump.inert = off; jump.setAttribute('aria-hidden', off ? 'true' : 'false');
+      jump.classList.toggle('up', r.bottom <= 0);
+    };
+    jump.addEventListener('click', function(){ cta.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); cta.focus({preventScroll: true}); });
+    window.addEventListener('scroll', place, {passive:true}); window.addEventListener('resize', place); place();
+  }
   var els = document.querySelectorAll('.rv,.reveal');
   // video testimonials: the play button starts the video and hands over to the native controls (runs for every visitor)
   document.querySelectorAll('.pm-vwrap').forEach(function(w){
