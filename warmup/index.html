@@ -57,6 +57,7 @@
   .video{container-type:inline-size}
   .vclick{position:absolute;inset:0;z-index:2;padding:0;border:0;background:transparent;cursor:pointer;border-radius:inherit;direction:rtl;font:inherit}
   .vclick[hidden]{display:none}
+  .vsl-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;pointer-events:none}
   .vclick:focus-visible{outline:3px solid #3a2707;outline-offset:-4px}
   .vsl-sound-mark{position:absolute;left:50%;top:64%;transform:translate(-50%,-50%);width:clamp(26px,7.34375cqw,94px);aspect-ratio:1;
     display:grid;place-items:center;border-radius:50%;border:clamp(1px,.3125cqw,4px) solid #ffd15f;background:#e05a00;color:#f9f5e3}
@@ -118,6 +119,7 @@
              Lali 2.11: it starts muted as the page opens; a tap restarts it from the beginning with sound (../vsl-player.js, as on the landing page) -->
         <div class="video" id="video"><iframe id="vslframe" src="https://player.vimeo.com/video/1242548772?h=5b235bcbb1&amp;autoplay=1&amp;muted=1&amp;loop=0&amp;autopause=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="סרטון החסמים"></iframe>
           <button type="button" class="vclick" id="vclick" aria-label="תלחצי כאן כדי להפעיל סאונד">
+            <img class="vsl-poster" src="poster.jpg" width="960" height="540" alt="" fetchpriority="high"><!-- Lali's face, never a black frame (Lali 2.11) -->
             <span class="vsl-sound-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.1-3.8v7.6a4.5 4.5 0 0 0 2.1-3.8Zm0-8.4v2.5a7.5 7.5 0 0 1 0 11.8v2.5a10 10 0 0 0 0-16.8Z"/></svg></span>
             <span class="vsl-sound-label"><span>תלחצי כאן כדי להפעיל סאונד</span></span>
           </button></div>
