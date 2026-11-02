@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>הכנה לדייט הראשון שלנו | זוגיות בדרך הטבע</title>
+<script defer src="../vsl-player.js?v=20261027-direct"></script>
 <style>
 [hidden]{display:none!important}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
@@ -914,9 +915,14 @@ input,button,select,textarea{font-family:inherit}
       <p class="pm-watch rise" style="--ad:.2s">צפי בסרטון לפני הפגישה שלנו</p>
       <div class="pm-chevrons rise" style="--ad:.25s" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6l7 6 7-6M5 13l7 6 7-6"/></svg></div>
       <div class="video-shell rise" style="--ad:.3s">
-        <!-- סרטון ההכנה, final 5 (אושר בידי ללי 31.10), ב-Vimeo של ללי כמוסתר (unlisted); מתנגן בלחיצה -->
+        <!-- סרטון ההכנה, final 5 (אושר בידי ללי 31.10), ב-Vimeo של ללי כמוסתר (unlisted).
+             2.11 (ללי): מתחיל לרוץ בלי קול כשהדף נפתח; לחיצה מחזירה להתחלה עם קול. אותו מנגנון כמו בדף הנחיתה (../vsl-player.js) -->
         <div class="video-card has-video" id="video" aria-label="סרטון ההכנה לפגישה">
-          <iframe src="https://player.vimeo.com/video/1241513073?h=2a66ad125d&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="סרטון ההכנה לפגישה"></iframe>
+          <iframe id="vslframe" src="https://player.vimeo.com/video/1241513073?h=2a66ad125d&amp;autoplay=1&amp;muted=1&amp;loop=0&amp;autopause=0&amp;title=0&amp;byline=0&amp;portrait=0&amp;dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="סרטון ההכנה לפגישה"></iframe>
+          <button type="button" class="vclick" id="vclick" aria-label="תלחצי כאן כדי להפעיל סאונד">
+            <span class="vsl-sound-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.1-3.8v7.6a4.5 4.5 0 0 0 2.1-3.8Zm0-8.4v2.5a7.5 7.5 0 0 1 0 11.8v2.5a10 10 0 0 0 0-16.8Z"/></svg></span>
+            <span class="vsl-sound-label"><span>תלחצי כאן כדי להפעיל סאונד</span></span>
+          </button>
         </div>
       </div>
       <p class="pm-band-lead">בסרטון אני מסבירה מה נעשה בפגישה ואיך להגיע אליה מוכנה, כדי שנוכל להקדיש את השיחה למה שמעסיק אותך.</p>
