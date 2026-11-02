@@ -68,6 +68,31 @@
 
   section{padding:36px 0 0}
   .center{text-align:center;text-wrap:balance}
+  p.center+p.center{margin-top:14px}
+  /* the two paragraphs fill their lines to the same width (Lali 2.11: widths must match) */
+  main section > p.center,.case-quote{text-wrap:pretty;text-align:justify;text-align-last:center}
+  .explain{margin-top:10px;text-align:center;font-size:clamp(1.5rem,6.4vw,1.9rem);line-height:1.3;color:var(--orange-ink)}
+  .sub{margin-top:18px;font-size:clamp(1.05rem,4.4vw,1.3rem);line-height:1.55;color:var(--orange-ink);text-wrap:balance}
+  /* case study, as the testimonial cards on the pre-meeting page */
+  /* the clip speaks for itself: no frame, only a blinking play button (Lali 2.11) */
+  .case-video{position:relative;width:min(280px,76%);margin-inline:auto}
+  .case-video video{display:block;width:100%;border-radius:16px}
+  .case-play{position:absolute;left:50%;top:50%;width:76px;aspect-ratio:1;transform:translate(-50%,-50%);border:0;border-radius:50%;cursor:pointer;display:grid;place-items:center;background:radial-gradient(circle at 36% 30%,var(--terracotta-light) 0%,var(--orange) 45%,var(--orange-ink) 100%);box-shadow:0 14px 32px -10px rgba(224,90,0,.6);animation:blink 1.4s var(--ease-soft) infinite;-webkit-tap-highlight-color:transparent}
+  .case-play svg{width:34%;margin-inline-start:8%;fill:var(--cream-lift)}
+  .case-play:focus-visible{outline:3px solid var(--brown);outline-offset:4px}
+  .case-video.on .case-play{display:none}
+  @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(224,90,0,.55)}50%{opacity:.82;box-shadow:0 0 0 14px rgba(224,90,0,0)}}
+  @media (prefers-reduced-motion:reduce){.case-play{animation:none}}
+  /* quote: right to left, centered, lines filled (Lali 2.11) */
+  .case-quote{width:min(280px,76%);margin:14px auto 0;text-align:justify;text-align-last:center;font-family:'GveretLevin',cursive;font-size:clamp(1.2rem,5vw,1.45rem);line-height:1.44;color:var(--orange-ink)}  /* floating guide to the WhatsApp button, as the guide to the questionnaire on the pre-meeting page (pre-meeting-build-2026-10-16/build2.py) */
+  .pm-jump{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:0;border-radius:999px;cursor:pointer;background:linear-gradient(135deg,#6C8830 0%,#6E7216 46%,#5B7328 100%);color:#EFE9D8;font-family:'Rubik',sans-serif;font-size:15px;font-weight:600;line-height:1;white-space:nowrap;box-shadow:0 0 0 1.5px rgba(255,209,95,.7),0 12px 26px -12px rgba(91,115,40,.7);transform:translate(-50%,0);opacity:1;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+  .pm-jump[hidden]{display:inline-flex;opacity:0;transform:translate(-50%,140%);pointer-events:none}
+  .pm-jump svg{width:1.15em;height:1.15em;fill:none;stroke:#FFD15F;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;animation:pmBob 1.8s var(--ease-soft) infinite}
+  .pm-jump.up svg{transform:rotate(180deg);animation-name:pmBobUp}
+  .pm-jump:focus-visible{outline:3px solid #E05A00;outline-offset:3px}
+  @keyframes pmBob{0%,100%{translate:0 0}50%{translate:0 3px}}
+  @keyframes pmBobUp{0%,100%{translate:0 0}50%{translate:0 -3px}}
+  @media (prefers-reduced-motion:reduce){.pm-jump svg{animation:none}.pm-jump{transition:none}}
 
   /* call to action: WhatsApp green button on the dark card, as on the gift page */
   .cta{margin:36px 0 0;padding:32px 22px 28px;border-radius:30px;text-align:center;background:linear-gradient(178deg,#3A2510 0%,var(--bark) 60%,var(--bark-deep) 100%);color:#F6EFDF;box-shadow:0 30px 60px -30px rgba(42,27,7,.75)}
@@ -109,8 +134,8 @@
 
 <header class="hero">
   <div class="wrap">
-    <!-- headline: waits for the video transcript and Lali's approval -->
-    <h1 class="display">שלושה חסמים שמונעים מנשים להיכנס לזוגיות</h1>
+    <h1 class="display">מה 3 החסמים שמונעים מנשים להיכנס לזוגיות?</h1>
+    <p class="sub">מעשרות שעות בקליניקה, אלה 3 הגורמים העיקריים שחוסמים נשים מוצלחות מתחת לגיל 30 מלהיכנס לזוגיות</p>
   </div>
   <div class="band">
     <div class="wrap">
@@ -130,13 +155,24 @@
 
 <main class="wrap">
   <section>
-    <!-- short note on the video: written from the full transcript, then approved by Lali -->
-    <p class="center">לפני שאנחנו נפגשות, תקשיבי לסרטון עוד פעם ותשאלי את עצמך: למה לדעתך את לא בזוגיות? מה נתפס אצלך בתת המודע ומייצר את זה? מי שעשתה את התרגיל הזה הגיעה לדייט הראשון שלנו והבינה הרבה יותר מהר מה היא צריכה לעשות כדי להיכנס לקשר זוגי.</p>
+    <!-- the page also goes to leads who have not booked yet, so no "before we meet" here (Lali 2.11) -->
+    <p class="center">אבל יש הרבה יותר ממה שאנחנו רואות מתחת לפני השטח, כי לכל חסם כזה יש גם סיבה בתת המודע.</p>
+    <p class="center">מי שעשתה את התרגיל הזה הצליחה להבין הרבה יותר מהר מה חוסם אותה ולהיכנס לזוגיות.</p>
+    <p class="explain script">ועל זה בדיוק אני מסבירה פה</p>
+  </section>
+
+  <!-- case study clip (Lali 2.11). Never a client's name in the page, its files or its code (Lali 2.11) -->
+  <section class="case">
+    <div class="case-video">
+      <video id="case" src="case.mp4" poster="case.jpg" playsinline preload="none" aria-label="עדות מתוך פגישה"></video>
+      <button type="button" class="case-play" id="case-play" aria-label="הפעלת העדות"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg></button>
+    </div>
+    <p class="case-quote">"הכל התקשר לאקס שלי, לאהבה ראשונה... ואחרי חמש שנים סגרתי איתו מעגל"</p>
   </section>
 
   <div class="cta">
     <h2 class="display">צפית? שתפי אותי מה חשבת</h2>
-    <p>נמשיך מזה בפגישה שלנו.</p>
+    <p>נמשיך מזה בדייט הראשון שלנו.</p>
     <a class="btn" id="cta" href="https://wa.me/972586180280">
       <span>צפיתי, אני רוצה לספר לך</span>
       <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3.2 29l6.5-1.7c1.9 1 4 1.6 6.3 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.7-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.6 16 26.6z"/><path fill="#fff" d="M21.9 18.6c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 2.8 1.1 3.4.9 4 .8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
@@ -154,7 +190,29 @@
   <span class="script">באהבה,<br>עו"ד ללי פיצ'חדזה</span>
 </footer>
 
+<button type="button" class="pm-jump" id="pm-jump" hidden>שתפי אותי בוואטסאפ<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+
 <script>
+  // floating guide to the WhatsApp button: hidden while the button is on screen or at the very top of the page
+  (function(){
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var jump = document.getElementById('pm-jump'), cta = document.getElementById('cta');
+    var place = function(){
+      var r = cta.getBoundingClientRect(), h = window.innerHeight;
+      var off = (r.bottom > 0 && r.top < h) || window.scrollY < h * 0.35;
+      jump.hidden = off; jump.inert = off; jump.setAttribute('aria-hidden', off ? 'true' : 'false');
+      jump.classList.toggle('up', r.bottom <= 0);
+    };
+    jump.addEventListener('click', function(){ cta.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); cta.focus({preventScroll: true}); });
+    window.addEventListener('scroll', place, {passive:true}); window.addEventListener('resize', place); place();
+  })();
+  // case clip: the play button starts it and hands over to the native controls
+  (function(){
+    var w = document.querySelector('.case-video'), v = document.getElementById('case');
+    document.getElementById('case-play').addEventListener('click', function(){
+      w.classList.add('on'); v.controls = true; var p = v.play(); if (p && p.catch) p.catch(function(){});
+    });
+  })();
   // topic from the barriers video (Clipchamp 2): its three chapters are the three barriers
   var TOPIC='שלושת החסמים';
   document.getElementById('cta').href='https://wa.me/972586180280?text='+encodeURIComponent('היי ללי, צפיתי בסרטון על '+TOPIC+'. רציתי לספר לך מה עלה לי:');
