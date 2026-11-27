@@ -473,8 +473,30 @@ section.ny-nums{--k:.86}
 /* ---------- הערות ללי על date, 27.11 (lali-editor-notes-date-2026-11-27.json), בכל הדפים ---------- */
 @media (max-width:640px){
   /* b022: "שלפחות 2 עיגולים שלמים, אם לא 3, ייכנסו לתוך גלילה אחת", פחות מרווח בין מספר לכיתוב */
-  section.ny-nums{--k:.62}
-  #ny-nums .ny-step + .ny-step{margin-top:-26px!important}
+  section.ny-nums{--k:.5}
+  /* ללי, 27.11: "תקרב את המרווח ביניהם, תוסיף את החיצים", העיגולים שבאותו צד לא נדבקים.
+     זיגזג צר סביב מרכז: מרכזי העיגולים ב-65px ימינה/שמאלה, ומרווח קבוע של כ-32px בין כל עיגול לבא אחריו
+     לאורך מסלול הקריאה. הקוטרים ב-k=.5: 86,94,102,111,122. מרחק בין מרכזים = רדיוסים + 32,
+     ומכאן ההפרש האנכי בין מרכזים 53,69,83,102 וה-margin של כל צעד */
+  #ny-nums .ny-step{justify-items:center}
+  #ny-nums .ny-step:nth-child(odd) .ny-dot{left:65px}
+  #ny-nums .ny-step:nth-child(even) .ny-dot{left:-65px}
+  #ny-nums .ny-step.ny-s2{margin-top:-38px!important}
+  #ny-nums .ny-step.ny-s3{margin-top:-27px!important}
+  #ny-nums .ny-step.ny-s4{margin-top:-21px!important}
+  #ny-nums .ny-step.ny-s5{margin-top:-14px!important}
+  /* חץ זהב קטן באמצע הרווח, מכוון מהעיגול הקודם לבא */
+  #ny-nums .ny-arw{display:none}
+  #ny-nums .ny-step + .ny-step::after{content:"";position:absolute;left:50%;width:22px;height:22px;margin:-11px 0 0 -11px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8964A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v17M6 14l6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+  #ny-nums .ny-s2::after{top:21px;transform:rotate(68deg)}
+  #ny-nums .ny-s3::after{top:15px;transform:rotate(-61deg)}
+  #ny-nums .ny-s4::after{top:12px;transform:rotate(56deg)}
+  #ny-nums .ny-s5::after{top:9px;transform:rotate(-52deg)}
+  #ny-nums .ny-chain{padding-bottom:8px}
+  /* ריחוף עדין, כל עיגול בקצב שלו */
+  #ny-nums .ny-dot{animation:nyFloat 3.6s ease-in-out infinite alternate}
+  #ny-nums .ny-step:nth-child(even) .ny-dot{animation-delay:-1.8s}
   #ny-nums .ny-dot .ny-l{font-size:calc(var(--s)*var(--k)*.13);line-height:1.05;max-width:80%}
   #ny-nums .ny-dot{gap:2px}
   /* b066: "תקטין את זה כדי שזה ייכנס רק בשתי שורות" */
@@ -486,6 +508,8 @@ section.ny-nums{--k:.86}
   /* b112: "תוודא שזה נכנס בשורה אחת" */
   html body p.lw-one{font-size:min(17px,4.25vw)!important;white-space:nowrap}
 }
+@keyframes nyFloat{from{translate:0 -3px}to{translate:0 3px}}
+@media (prefers-reduced-motion:reduce){#ny-nums .ny-dot{animation:none}}
 /* b022: "החיצים נראים די זולים": קו דק בזהב במקום כתום עבה */
 #ny-nums .ny-arw{stroke:var(--gold-line,#D4A359);stroke-width:1.6;opacity:.9}
 /* b084: "הכתום בהיר מדי, הוא אמור להיות כהה יותר": #F09A4A -> #E8731F (ניגודיות 5.5 על הרקע הכהה) */
